@@ -142,9 +142,9 @@ h2.disp{font-size:clamp(3rem,10vw,7.5rem)}
 .units-stage{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;gap:clamp(1.2rem,3vw,2rem);padding-block:56px 24px}
 .units-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(20px,5vw,64px);align-items:center}
 @media (max-width:820px){.units-grid{grid-template-columns:1fr}}
-.unit-names{list-style:none;margin:0;padding:0;display:grid;gap:.15rem;min-width:0}
+.unit-names{list-style:none;margin:0;padding:0;display:grid;gap:.15rem;min-width:0;container-type:inline-size}
 .unit-names li{min-width:0;overflow:hidden;padding-right:.3em}
-.unit-names button{all:unset;cursor:pointer;display:block;font-family:var(--display);font-stretch:66%;font-weight:900;text-transform:uppercase;font-size:clamp(2.2rem,5.6vw,4.6rem);line-height:.95;max-width:100%;overflow-wrap:anywhere;color:rgba(244,246,250,.13);transition:color .4s ease,transform .4s cubic-bezier(.2,.8,.2,1)}
+.unit-names button{all:unset;cursor:pointer;display:block;font-family:var(--display);font-stretch:66%;font-weight:900;text-transform:uppercase;font-size:min(4.6rem,10.5cqi);line-height:.95;white-space:nowrap;color:rgba(244,246,250,.13);transition:color .4s ease,transform .4s cubic-bezier(.2,.8,.2,1)}
 .unit-names button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .unit-names li.on button{color:var(--white);transform:translateX(14px)}
 .unit-names li.on button::after{content:"";display:inline-block;width:.18em;height:.18em;margin-left:.15em;border-radius:50%;background:var(--blue);vertical-align:.12em}
@@ -415,21 +415,10 @@ h2.disp{font-size:clamp(3rem,10vw,7.5rem)}
 
 <div class="band" aria-hidden="true"><div class="band-track" id="band"></div></div>
 
-<!-- 1:30 -->
-<section class="side" id="s-side" data-tc="90" data-chap="The side quests">
+<!-- 1:45 -->
+<section class="people" id="s-people" data-tc="105" data-chap="People I've learned from">
   <div class="wrap">
-    <div class="slate"><span class="tc">1:30</span><span class="cam">B-ROLL</span><span class="label">Side quests</span></div>
-    <h2 class="disp rv">Side quests</h2>
-    <p class="lede rv">Not everything needs to become a startup.</p>
-    <div class="wall" id="wall"></div>
-    <p class="sq-story" id="sqStory" aria-live="polite">Pick a tile.</p>
-  </div>
-</section>
-
-<!-- 2:00 -->
-<section class="people" id="s-people" data-tc="120" data-chap="People I've learned from">
-  <div class="wrap">
-    <div class="slate"><span class="tc">2:00</span><span class="cam">CAM 4</span><span class="label">Not sharks. Better.</span></div>
+    <div class="slate"><span class="tc">1:45</span><span class="cam">CAM 4</span><span class="label">Not sharks. Better.</span></div>
     <h2 class="disp rv">People I’ve learned from</h2>
     <p class="lede rv" style="color:var(--dim);font-size:1.15rem;margin-top:1rem">People who have influenced the way I build. Flip a card.</p>
     <div class="ppl" id="ppl"></div>
@@ -619,27 +608,6 @@ function revenue(el){
 /* ---------- build band ---------- */
 const words = ['Build.','Test.','Fail.','Build again.'];
 $('#band').innerHTML = [...words,...words,...words,...words].map(w=>`<span>${w}</span>`).join('');
-
-/* ---------- side quests ---------- */
-const SQ = [
-  ['🎾','Tennis','Story and photos coming soon. Until then, consider this an open challenge.'],
-  ['🏑','Hockey','Selected for <b>national hockey</b>. Also took <b>state gold in long jump</b>, because one sport was never going to be enough.'],
-  ['🏋️','Gym','I talked my entire family, none of them gym people, into <b>HYROX</b>: 8 km of running and eight stations. <b>Every one of them finished.</b>'],
-  ['✈️','Travel','I once went to a city I’d never been to with <b>₹500</b> and a phone that could only make calls, to see if I could last 10 days. Day two, I walked into firms with a <b>handwritten resume</b>, showed one how to use AI, and left with a meal and <b>₹1,500</b>.'],
-  ['💡','Startups','Turned down a hard-to-get internship to spend a summer <b>hopping between startups</b>, a week at each, watching how founders actually work.'],
-  ['🎨','Design','An award for a <b>solar dehydrator</b>. <b>“Most Sustainable”</b> at the BIEA STEM competition. A pump insert that stops shampoo going to waste.'],
-  ['📱','Building apps','An <b>alarm</b> that only turns off when you get out of bed and tap your phone across the room. My friends use it every day and <b>offered to pay</b> for it.'],
-  ['☕','Coffee chats','I met <b>Dr. Arpit Bhardwaj</b> outside a Starbucks. Three weeks later I was analysing <b>EEG brain signals</b> with him.'],
-  ['🎬','Movie recaps','I can watch <b>15 recaps</b> in the time of one movie. I once sat through an <b>entire film auction</b>, and I’ve written a few recaps myself.'],
-  ['🇮🇳','India','Where it all started. Every story on this page with a ₹ sign in it happened here.'],
-  ['🇺🇸','Northwestern','Picked it over <b>King’s College, Cambridge</b>, when every single person I asked said Cambridge. Too early to say I was right. I’m working on it.']
-];
-SQ.forEach(([ic, nm, story]) => {
-  const b = document.createElement('button'); b.type='button'; b.className='sq rv'; b.setAttribute('aria-pressed','false');
-  b.innerHTML = `<span class="ic" aria-hidden="true">${ic}</span><span class="nm">${nm}</span>`;
-  b.addEventListener('click', () => { $$('.sq').forEach(x => x.setAttribute('aria-pressed', x === b)); $('#sqStory').innerHTML = story; sfx.tick(); });
-  $('#wall').appendChild(b);
-});
 
 /* ---------- people ---------- */
 const PPL = [
